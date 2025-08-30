@@ -1,4 +1,6 @@
-#pragma once
+ï»¿#pragma once
+#include "GeneradorCodigo.h"
+#include "ParserNatural.h"
 
 namespace PROYECTOESTRUCTURA {
 
@@ -19,13 +21,13 @@ namespace PROYECTOESTRUCTURA {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cÃ³digo de constructor aquÃ­
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estÃ©n usando.
 		/// </summary>
 		~InterfazGrafica()
 		{
@@ -40,7 +42,8 @@ namespace PROYECTOESTRUCTURA {
 	private: System::Windows::Forms::Label^ txtNombrePrograma;
 
 	private: System::Windows::Forms::Button^ btnEjecutar;
-	private: System::Windows::Forms::Button^ btnGenerar;
+	private: System::Windows::Forms::Button^ btnGenerarCPP;
+
 	private: System::Windows::Forms::RichTextBox^ txtEntrada;
 
 
@@ -54,14 +57,17 @@ namespace PROYECTOESTRUCTURA {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseÃ±ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
+	private: System::Windows::Forms::Button^ btnSalir;
+
+		   List<String^>^ codigoGenerado;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// MÃ©todo necesario para admitir el DiseÃ±ador. No se puede modificar
+		/// el contenido de este mÃ©todo con el editor de cÃ³digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -71,8 +77,9 @@ namespace PROYECTOESTRUCTURA {
 			this->LOGO = (gcnew System::Windows::Forms::PictureBox());
 			this->txtNombrePrograma = (gcnew System::Windows::Forms::Label());
 			this->btnEjecutar = (gcnew System::Windows::Forms::Button());
-			this->btnGenerar = (gcnew System::Windows::Forms::Button());
+			this->btnGenerarCPP = (gcnew System::Windows::Forms::Button());
 			this->txtEntrada = (gcnew System::Windows::Forms::RichTextBox());
+			this->btnSalir = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->LOGO))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -120,7 +127,7 @@ namespace PROYECTOESTRUCTURA {
 			this->txtNombrePrograma->BackColor = System::Drawing::SystemColors::Highlight;
 			this->txtNombrePrograma->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->txtNombrePrograma->Location = System::Drawing::Point(656, 694);
+			this->txtNombrePrograma->Location = System::Drawing::Point(144, 703);
 			this->txtNombrePrograma->Name = L"txtNombrePrograma";
 			this->txtNombrePrograma->Size = System::Drawing::Size(185, 31);
 			this->txtNombrePrograma->TabIndex = 3;
@@ -140,17 +147,18 @@ namespace PROYECTOESTRUCTURA {
 			this->btnEjecutar->UseVisualStyleBackColor = false;
 			this->btnEjecutar->Click += gcnew System::EventHandler(this, &InterfazGrafica::btnEjecutar_Click);
 			// 
-			// btnGenerar
+			// btnGenerarCPP
 			// 
-			this->btnGenerar->BackColor = System::Drawing::Color::Teal;
-			this->btnGenerar->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnGenerarCPP->BackColor = System::Drawing::Color::Teal;
+			this->btnGenerarCPP->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnGenerar->Location = System::Drawing::Point(585, 543);
-			this->btnGenerar->Name = L"btnGenerar";
-			this->btnGenerar->Size = System::Drawing::Size(292, 67);
-			this->btnGenerar->TabIndex = 5;
-			this->btnGenerar->Text = L"GENERAR .CPP";
-			this->btnGenerar->UseVisualStyleBackColor = false;
+			this->btnGenerarCPP->Location = System::Drawing::Point(585, 543);
+			this->btnGenerarCPP->Name = L"btnGenerarCPP";
+			this->btnGenerarCPP->Size = System::Drawing::Size(292, 67);
+			this->btnGenerarCPP->TabIndex = 5;
+			this->btnGenerarCPP->Text = L"GENERAR .CPP";
+			this->btnGenerarCPP->UseVisualStyleBackColor = false;
+			this->btnGenerarCPP->Click += gcnew System::EventHandler(this, &InterfazGrafica::btnGenerar_Click);
 			// 
 			// txtEntrada
 			// 
@@ -162,14 +170,29 @@ namespace PROYECTOESTRUCTURA {
 			this->txtEntrada->TabIndex = 6;
 			this->txtEntrada->Text = L"";
 			// 
+			// btnSalir
+			// 
+			this->btnSalir->BackColor = System::Drawing::Color::Red;
+			this->btnSalir->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnSalir->ForeColor = System::Drawing::Color::Cornsilk;
+			this->btnSalir->Location = System::Drawing::Point(1143, 667);
+			this->btnSalir->Name = L"btnSalir";
+			this->btnSalir->Size = System::Drawing::Size(165, 56);
+			this->btnSalir->TabIndex = 7;
+			this->btnSalir->Text = L"SALIR";
+			this->btnSalir->UseVisualStyleBackColor = false;
+			this->btnSalir->Click += gcnew System::EventHandler(this, &InterfazGrafica::button1_Click_1);
+			// 
 			// InterfazGrafica
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::InactiveCaption;
 			this->ClientSize = System::Drawing::Size(1414, 805);
+			this->Controls->Add(this->btnSalir);
 			this->Controls->Add(this->txtEntrada);
-			this->Controls->Add(this->btnGenerar);
+			this->Controls->Add(this->btnGenerarCPP);
 			this->Controls->Add(this->btnEjecutar);
 			this->Controls->Add(this->txtNombrePrograma);
 			this->Controls->Add(this->LOGO);
@@ -203,8 +226,54 @@ namespace PROYECTOESTRUCTURA {
 private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void btnEjecutar_Click(System::Object^ sender, System::EventArgs^ e) {
+	array<String^>^ lineas = txtEntrada->Text->Split(gcnew array<wchar_t>{'\n'}, StringSplitOptions::RemoveEmptyEntries);
+	GeneradorCodigo^ generador = gcnew GeneradorCodigo();
+
+	for each (String ^ linea in lineas) {
+		String^ instruccionCpp = ParserNatural::ParseLinea(linea);
+		generador->Agregar(instruccionCpp);
+	}
+
+	List<String^>^ resultado = generador->Finalizar();
+	Console::WriteLine("Codigo generado:");
+	for each (String ^ l in resultado) {
+		Console::WriteLine(l);
+	}
 }
 private: System::Void richTextBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+
+private: System::Void btnGenerar_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (codigoGenerado == nullptr || codigoGenerado->Count == 0) {
+		Console::WriteLine("No hay codigo para exportar.");
+		return;
+	}
+
+	SaveFileDialog^ guardar = gcnew SaveFileDialog();
+	guardar->Filter = "Archivo C++ (*.cpp)|*.cpp";
+	guardar->Title = "Guardar como .cpp";
+
+	if (guardar->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		try {
+			System::IO::File::WriteAllLines(guardar->FileName, codigoGenerado);
+			Console::WriteLine("Codigo exportado correctamente.");
+		}
+		catch (Exception^ ex) {
+			Console::WriteLine("Error: " + ex->Message);
+		}
+	}
+}
+private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	System::Windows::Forms::DialogResult resultado = MessageBox::Show(
+		"Â¿Seguro que querÃ©s cerrar el programa?",
+		"Confirmar salida",
+		MessageBoxButtons::YesNo,
+		MessageBoxIcon::Question
+	);
+
+	if (resultado == System::Windows::Forms::DialogResult::Yes) {
+		Application::Exit();
+	}
 }
 };
 }

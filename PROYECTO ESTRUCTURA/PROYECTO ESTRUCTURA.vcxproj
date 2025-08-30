@@ -127,6 +127,7 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GeneradorCodigo.h" />
     <ClInclude Include="InterfazGrafica.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="GeneradorCodigo.cpp" />
     <ClCompile Include="InterfazGrafica.cpp" />
     <ClCompile Include="ParserNatural.cpp" />
     <ClCompile Include="pch.cpp">
